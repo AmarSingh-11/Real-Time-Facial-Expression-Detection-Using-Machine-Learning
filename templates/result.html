@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+        img {
+            border: 5px solid #ddd;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 80%;
+        }
+        .results {
+            margin: 20px auto;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Processed Image with Detected Faces</h1>
+    <div>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+    </div>
+    <div class="results">
+        <h2>Detected Emotions</h2>
+        {% if results %}
+        <ul>
+            {% for x, y, w, h, label in results %}
+                <li>Face detected at ({{ x }}, {{ y }}), Width: {{ w }}, Height: {{ h }}, Emotion: {{ label }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No faces or emotions detected in the uploaded image.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
